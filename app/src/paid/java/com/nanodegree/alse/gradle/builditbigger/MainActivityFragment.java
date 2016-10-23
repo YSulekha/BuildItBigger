@@ -9,15 +9,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
+import android.widget.ProgressBar;
 
 
 /**
  * A placeholder fragment containing a simple view.
  */
 public class MainActivityFragment extends Fragment {
+    ProgressBar progressBar;
 
     public MainActivityFragment() {
     }
@@ -35,18 +34,31 @@ public class MainActivityFragment extends Fragment {
             }
         });
 
+        progressBar = (ProgressBar)root.findViewById(R.id.progress_bar);
+        progressBar.setVisibility(View.GONE);
+
 
         return root;
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        progressBar.setVisibility(View.GONE);
+        //super.onPause();
     }
 
     public void tellJoke(View view){
 
         //Toast.makeText(this, "derp", Toast.LENGTH_SHORT).show();
         Log.v("Inside tellJoke","ada");
+        progressBar.setVisibility(View.VISIBLE);
         new MyBackendAsyncTask().execute(new Pair<Context,String>(getActivity(),"Test123"));
+
       //  JokeWizard jokeWizard = new JokeWizard();
         //String joke = jokeWizard.getJokes();
         // Toast.makeText(this, jokeWizard.getJokes(), Toast.LENGTH_SHORT).show();
 
     }
+
 }

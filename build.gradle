@@ -18,3 +18,14 @@ allprojects {
         jcenter()
     }
 }
+
+task testautomated{
+    dependsOn = [':backend:appengineRun',':app:connectedAndroidTest',':backend:appengineStop']
+
+   tasks.findByPath(':backend:appengineRun').setProperty('daemon',true)
+    tasks.findByPath(':app:connectedAndroidTest')
+
+    task(':app:connectedAndroidTest').mustRunAfter(':backend:appengineRun')
+    task(':backend:appengineStop').mustRunAfter(':app:connectedAndroidTest')
+
+}

@@ -37,11 +37,15 @@ public class ApplicationTest extends ApplicationTestCase<Application> {
         task.setListener(new MyBackendAsyncTask.TaskCompleteListener() {
             @Override
             public void onComplete(String s) {
+                Log.v("JokeFromTest2",s);
                 joke = s;
+                countdown.countDown();
+
             }
         }).execute(new Pair<Context, String>(getContext(),"TestAn"));
         countdown.await();
-        Log.v("JokeFromTest",joke);
-        assertTrue(TextUtils.isEmpty(joke));
+        assertTrue(!TextUtils.isEmpty(joke));
+
+
     }
 }

@@ -1,0 +1,17 @@
+apply plugin: 'com.android.application'
+
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    // Added for AdMob
+    compile project(':jokeprovider')
+    compile project(':displayjoke')
+    compile 'com.android.support:appcompat-v7:24.2.1'
+    androidTestCompile 'com.android.support:support-annotations:24.2.1'
+    androidTestCompile 'com.android.support.test:runner:0.5'
+    compile 'com.google.code.findbugs:jsr305:2.0.1'
+    compile project(path: ':backend', configuration: 'android-endpoints')
+    freeCompile 'com.google.firebase:firebase-ads:9.6.1'
+}
+apply plugin: 'com.google.gms.google-services'
+

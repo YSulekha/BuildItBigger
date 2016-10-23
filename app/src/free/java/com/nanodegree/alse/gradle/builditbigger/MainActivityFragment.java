@@ -10,14 +10,19 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.InterstitialAd;
 
 
 /**
  * A placeholder fragment containing a simple view.
  */
 public class MainActivityFragment extends Fragment {
+
+
+    InterstitialAd mInterstitialAd;
 
     public MainActivityFragment() {
     }
@@ -28,7 +33,7 @@ public class MainActivityFragment extends Fragment {
         View root = inflater.inflate(R.layout.fragment_main, container, false);
 
         //MobileAds.initialize(getContext(), "ca-app-pub-3940256099942544~3347511713");
-        AdView mAdView = (AdView) root.findViewById(R.id.adView);
+       AdView mAdView = (AdView) root.findViewById(R.id.adView);
         // Create an ad request. Check logcat output for the hashed device ID to
         // get test ads on a physical device. e.g.
         // "Use AdRequest.Builder.addTestDevice("ABCDEF012345") to get test ads on this device."
@@ -37,15 +42,31 @@ public class MainActivityFragment extends Fragment {
                 .build();
         mAdView.loadAd(adRequest);
 
+        mInterstitialAd = new InterstitialAd(getActivity());
+        mInterstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
+        requestNewAd();
+
+        mInterstitialAd.setAdListener(new AdListener() {
+            @Override
+            public void onAdClosed() {
+                requestNewAd();
+                tellJoke(getView());
+            }
+        });
+
         Button tellJoke = (Button)root.findViewById(R.id.tellJoke_button);
         tellJoke.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                tellJoke(v);
+                if(mInterstitialAd.isLoaded()){
+                    mInterstitialAd.show();
+
+                }
+                else {
+                    tellJoke(v);
+                }
             }
         });
-
-
         return root;
     }
 
@@ -58,5 +79,10 @@ public class MainActivityFragment extends Fragment {
         //String joke = jokeWizard.getJokes();
         // Toast.makeText(this, jokeWizard.getJokes(), Toast.LENGTH_SHORT).show();
 
+    }
+    public void requestNewAd(){
+        AdRequest adRequest = new AdRequest.Builder().
+                addTestDevice(AdRequest.DEVICE_ID_EMULATOR).build();
+        mInterstitialAd.loadAd(adRequest);
     }
 }

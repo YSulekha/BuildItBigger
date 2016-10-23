@@ -29,6 +29,7 @@ public class MyBackendAsyncTask extends AsyncTask<Pair<Context,String>,Void,Stri
 
     @Override
     protected String doInBackground(Pair<Context, String>... params) {
+        Log.v("MyBackendAsyncTask","Loading Joke");
         if(myAPIService == null){
             MyApi.Builder builder = new MyApi.Builder(AndroidHttp.newCompatibleTransport(),new AndroidJsonFactory(),null)
                     .setRootUrl("https://builditbigger-6b5dd.appspot.com/_ah/api/");
@@ -49,7 +50,7 @@ public class MyBackendAsyncTask extends AsyncTask<Pair<Context,String>,Void,Stri
         //Toast toast = Toast.makeText(context,s,Toast.LENGTH_LONG);
         //toast.show();
         Log.v("InsidePost",s);
-       // listener.onComplete(s);
+//        listener.onComplete(s);
         Intent intent = new Intent(context,DisplayActivity.class);
         intent.putExtra(DisplayActivity.JOKE_EXTRA,s);
         context.startActivity(intent);

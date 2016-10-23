@@ -1,5 +1,7 @@
 apply plugin: 'com.android.application'
 
+def flavor
+
 android {
     compileSdkVersion 23
     buildToolsVersion "23.0.3"
@@ -20,9 +22,11 @@ android {
     productFlavors{
         paid{
             applicationId 'com.nanodegree.alse.gradle.builditbigger.paid'
+            flavor = "free"
         }
         free{
             applicationId 'com.nanodegree.alse.gradle.builditbigger.free'
+            flavor = "paid"
         }
     }
     lintOptions {
@@ -33,14 +37,15 @@ android {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     // Added for AdMob
-
     compile project(':jokeprovider')
     compile project(':displayjoke')
     compile 'com.android.support:appcompat-v7:24.2.1'
+    freeCompile 'com.google.firebase:firebase-ads:9.6.1'
     androidTestCompile 'com.android.support:support-annotations:24.2.1'
     androidTestCompile 'com.android.support.test:runner:0.5'
-    freeCompile 'com.google.firebase:firebase-ads:9.6.1'
     compile 'com.google.code.findbugs:jsr305:2.0.1'
     compile project(path: ':backend', configuration: 'android-endpoints')
 }
-apply plugin: 'com.google.gms.google-services'
+if(flavor=="free"){
+    apply plugin: 'com.google.gms.google-services'
+}
