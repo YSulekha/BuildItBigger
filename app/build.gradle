@@ -39,7 +39,7 @@ dependencies {
     // Added for AdMob
     compile project(':jokeprovider')
     compile project(':displayjoke')
-    compile 'com.android.support:appcompat-v7:24.2.1'
+    compile 'com.android.support:appcompat-v7:23.0.3'
     freeCompile 'com.google.firebase:firebase-ads:9.6.1'
     androidTestCompile 'com.android.support:support-annotations:24.2.1'
     androidTestCompile 'com.android.support.test:runner:0.5'
