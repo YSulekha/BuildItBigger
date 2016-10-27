@@ -1,12 +1,15 @@
 package com.nanodegree.alse.gradle.builditbigger;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.nanodegree.alse.displayjoke.DisplayActivity;
 
-public class MainActivity extends ActionBarActivity {
+
+public class MainActivity extends ActionBarActivity implements MyBackendAsyncTask.TaskCompleteListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +41,10 @@ public class MainActivity extends ActionBarActivity {
     }
 
 
-
-
+    @Override
+    public void onComplete(String s) {
+        Intent intent = new Intent(this,DisplayActivity.class);
+        intent.putExtra(DisplayActivity.JOKE_EXTRA,s);
+        startActivity(intent);
+    }
 }

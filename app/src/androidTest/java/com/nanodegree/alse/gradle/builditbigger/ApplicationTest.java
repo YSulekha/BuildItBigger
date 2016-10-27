@@ -1,8 +1,6 @@
 package com.nanodegree.alse.gradle.builditbigger;
 
 import android.app.Application;
-import android.content.Context;
-import android.support.v4.util.Pair;
 import android.test.ApplicationTestCase;
 import android.text.TextUtils;
 import android.util.Log;
@@ -42,7 +40,7 @@ public class ApplicationTest extends ApplicationTestCase<Application> {
                 countdown.countDown();
 
             }
-        }).execute(new Pair<Context, String>(getContext(),"TestAn"));
+        }).execute(getContext());
         countdown.await();
         assertTrue(!TextUtils.isEmpty(joke));
 

@@ -1,14 +1,13 @@
 package com.nanodegree.alse.gradle.builditbigger;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.util.Pair;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ProgressBar;
 
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
@@ -23,6 +22,7 @@ public class MainActivityFragment extends Fragment {
 
 
     InterstitialAd mInterstitialAd;
+    ProgressBar progressBar;
 
     public MainActivityFragment() {
     }
@@ -67,14 +67,27 @@ public class MainActivityFragment extends Fragment {
                 }
             }
         });
+
+        progressBar = (ProgressBar)root.findViewById(R.id.progress_bar);
+        progressBar.setVisibility(ProgressBar.GONE);
         return root;
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        progressBar.setVisibility(ProgressBar.GONE);
     }
 
     public void tellJoke(View view){
 
         //Toast.makeText(this, "derp", Toast.LENGTH_SHORT).show();
         Log.v("Inside tellJoke","ada");
-        new MyBackendAsyncTask().execute(new Pair<Context,String>(getActivity(),"Test123"));
+        progressBar.setVisibility(ProgressBar.VISIBLE);
+        MyBackendAsyncTask task = new MyBackendAsyncTask();
+        task.setListener((MainActivity)getActivity());
+        task.execute(getActivity());
+      //  new MyBackendAsyncTask().execute(new Pair<Context,String>(getActivity(),"Test123"));
       //  JokeWizard jokeWizard = new JokeWizard();
         //String joke = jokeWizard.getJokes();
         // Toast.makeText(this, jokeWizard.getJokes(), Toast.LENGTH_SHORT).show();

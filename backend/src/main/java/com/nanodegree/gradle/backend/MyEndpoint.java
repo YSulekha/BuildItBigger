@@ -38,6 +38,7 @@ public class MyEndpoint {
         return response;
     }
 
+    //Method which provides the joke from Java library
     @ApiMethod(name = "getJoke")
     public MyBean getJoke(){
         MyBean response = new MyBean();

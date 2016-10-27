@@ -1,9 +1,7 @@
 package com.nanodegree.alse.gradle.builditbigger;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.util.Pair;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -53,7 +51,10 @@ public class MainActivityFragment extends Fragment {
         //Toast.makeText(this, "derp", Toast.LENGTH_SHORT).show();
         Log.v("Inside tellJoke","ada");
         progressBar.setVisibility(View.VISIBLE);
-        new MyBackendAsyncTask().execute(new Pair<Context,String>(getActivity(),"Test123"));
+        MyBackendAsyncTask task = new MyBackendAsyncTask();
+        task.setListener((MainActivity)getActivity());
+        task.execute(getActivity());
+    //    new MyBackendAsyncTask().execute(new Pair<Context,String>(getActivity(),"Test123"));
 
       //  JokeWizard jokeWizard = new JokeWizard();
         //String joke = jokeWizard.getJokes();
