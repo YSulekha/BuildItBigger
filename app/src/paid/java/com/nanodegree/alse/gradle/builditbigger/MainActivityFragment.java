@@ -28,13 +28,12 @@ public class MainActivityFragment extends Fragment {
         tellJoke.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                tellJoke(v);
+                tellJoke();
             }
         });
 
         progressBar = (ProgressBar)root.findViewById(R.id.progress_bar);
         progressBar.setVisibility(View.GONE);
-
 
         return root;
     }
@@ -46,20 +45,13 @@ public class MainActivityFragment extends Fragment {
         //super.onPause();
     }
 
-    public void tellJoke(View view){
+    //Method to fetch joke from backend
+    public void tellJoke(){
 
-        //Toast.makeText(this, "derp", Toast.LENGTH_SHORT).show();
-        Log.v("Inside tellJoke","ada");
         progressBar.setVisibility(View.VISIBLE);
         MyBackendAsyncTask task = new MyBackendAsyncTask();
         task.setListener((MainActivity)getActivity());
         task.execute(getActivity());
-    //    new MyBackendAsyncTask().execute(new Pair<Context,String>(getActivity(),"Test123"));
-
-      //  JokeWizard jokeWizard = new JokeWizard();
-        //String joke = jokeWizard.getJokes();
-        // Toast.makeText(this, jokeWizard.getJokes(), Toast.LENGTH_SHORT).show();
-
     }
 
 }

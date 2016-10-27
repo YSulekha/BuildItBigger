@@ -2,7 +2,6 @@ package com.nanodegree.alse.gradle.builditbigger;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,15 +41,15 @@ public class MainActivityFragment extends Fragment {
                 .build();
         mAdView.loadAd(adRequest);
 
-        mInterstitialAd = new InterstitialAd(getActivity());
-        mInterstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
+        mInterstitialAd = new InterstitialAd(getContext());
+        mInterstitialAd.setAdUnitId(getContext().getString(R.string.interstial_ad_unit_ad));
         requestNewAd();
 
         mInterstitialAd.setAdListener(new AdListener() {
             @Override
             public void onAdClosed() {
                 requestNewAd();
-                tellJoke(getView());
+                tellJoke();
             }
         });
 
@@ -63,7 +62,7 @@ public class MainActivityFragment extends Fragment {
 
                 }
                 else {
-                    tellJoke(v);
+                    tellJoke();
                 }
             }
         });
@@ -79,20 +78,15 @@ public class MainActivityFragment extends Fragment {
         progressBar.setVisibility(ProgressBar.GONE);
     }
 
-    public void tellJoke(View view){
 
-        //Toast.makeText(this, "derp", Toast.LENGTH_SHORT).show();
-        Log.v("Inside tellJoke","ada");
+    public void tellJoke(){
         progressBar.setVisibility(ProgressBar.VISIBLE);
         MyBackendAsyncTask task = new MyBackendAsyncTask();
         task.setListener((MainActivity)getActivity());
-        task.execute(getActivity());
-      //  new MyBackendAsyncTask().execute(new Pair<Context,String>(getActivity(),"Test123"));
-      //  JokeWizard jokeWizard = new JokeWizard();
-        //String joke = jokeWizard.getJokes();
-        // Toast.makeText(this, jokeWizard.getJokes(), Toast.LENGTH_SHORT).show();
-
+        task.execute(getContext());
     }
+
+    //Method to fetch InterstitialAd
     public void requestNewAd(){
         AdRequest adRequest = new AdRequest.Builder().
                 addTestDevice(AdRequest.DEVICE_ID_EMULATOR).build();

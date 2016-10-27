@@ -2,7 +2,6 @@ package com.nanodegree.alse.gradle.builditbigger;
 
 import android.content.Context;
 import android.os.AsyncTask;
-import android.util.Log;
 
 import com.google.api.client.extensions.android.http.AndroidHttp;
 import com.google.api.client.extensions.android.json.AndroidJsonFactory;
@@ -42,13 +41,7 @@ public class MyBackendAsyncTask extends AsyncTask<Context,Void,String> {
 
     @Override
     protected void onPostExecute(String s) {
-        //Toast toast = Toast.makeText(context,s,Toast.LENGTH_LONG);
-        //toast.show();
-        Log.v("InsidePost",s);
         listener.onComplete(s);
-       /* Intent intent = new Intent(context,DisplayActivity.class);
-        intent.putExtra(DisplayActivity.JOKE_EXTRA,s);
-        context.startActivity(intent);*/
     }
 
     public interface TaskCompleteListener{
