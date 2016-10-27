@@ -32,7 +32,7 @@ public class MainActivityFragment extends Fragment {
         View root = inflater.inflate(R.layout.fragment_main, container, false);
 
         //MobileAds.initialize(getContext(), "ca-app-pub-3940256099942544~3347511713");
-       AdView mAdView = (AdView) root.findViewById(R.id.adView);
+        AdView mAdView = (AdView) root.findViewById(R.id.adView);
         // Create an ad request. Check logcat output for the hashed device ID to
         // get test ads on a physical device. e.g.
         // "Use AdRequest.Builder.addTestDevice("ABCDEF012345") to get test ads on this device."
@@ -53,21 +53,20 @@ public class MainActivityFragment extends Fragment {
             }
         });
 
-        Button tellJoke = (Button)root.findViewById(R.id.tellJoke_button);
+        Button tellJoke = (Button) root.findViewById(R.id.tellJoke_button);
         tellJoke.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(mInterstitialAd.isLoaded()){
+                if (mInterstitialAd.isLoaded()) {
                     mInterstitialAd.show();
 
-                }
-                else {
+                } else {
                     tellJoke();
                 }
             }
         });
 
-        progressBar = (ProgressBar)root.findViewById(R.id.progress_bar);
+        progressBar = (ProgressBar) root.findViewById(R.id.progress_bar);
         progressBar.setVisibility(ProgressBar.GONE);
         return root;
     }
@@ -79,15 +78,15 @@ public class MainActivityFragment extends Fragment {
     }
 
 
-    public void tellJoke(){
+    public void tellJoke() {
         progressBar.setVisibility(ProgressBar.VISIBLE);
         MyBackendAsyncTask task = new MyBackendAsyncTask();
-        task.setListener((MainActivity)getActivity());
+        task.setListener((MainActivity) getActivity());
         task.execute(getContext());
     }
 
     //Method to fetch InterstitialAd
-    public void requestNewAd(){
+    public void requestNewAd() {
         AdRequest adRequest = new AdRequest.Builder().
                 addTestDevice(AdRequest.DEVICE_ID_EMULATOR).build();
         mInterstitialAd.loadAd(adRequest);

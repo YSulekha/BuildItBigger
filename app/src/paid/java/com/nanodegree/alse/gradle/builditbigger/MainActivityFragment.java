@@ -24,7 +24,7 @@ public class MainActivityFragment extends Fragment {
                              Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_main, container, false);
 
-        Button tellJoke = (Button)root.findViewById(R.id.tellJoke_button);
+        Button tellJoke = (Button) root.findViewById(R.id.tellJoke_button);
         tellJoke.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -32,7 +32,7 @@ public class MainActivityFragment extends Fragment {
             }
         });
 
-        progressBar = (ProgressBar)root.findViewById(R.id.progress_bar);
+        progressBar = (ProgressBar) root.findViewById(R.id.progress_bar);
         progressBar.setVisibility(View.GONE);
 
         return root;
@@ -46,11 +46,11 @@ public class MainActivityFragment extends Fragment {
     }
 
     //Method to fetch joke from backend
-    public void tellJoke(){
+    public void tellJoke() {
 
         progressBar.setVisibility(View.VISIBLE);
         MyBackendAsyncTask task = new MyBackendAsyncTask();
-        task.setListener((MainActivity)getActivity());
+        task.setListener((MainActivity) getActivity());
         task.execute(getActivity());
     }
 

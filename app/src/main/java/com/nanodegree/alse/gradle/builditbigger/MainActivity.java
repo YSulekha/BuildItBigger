@@ -43,8 +43,8 @@ public class MainActivity extends ActionBarActivity implements MyBackendAsyncTas
 
     @Override
     public void onComplete(String s) {
-        Intent intent = new Intent(this,DisplayActivity.class);
-        intent.putExtra(DisplayActivity.JOKE_EXTRA,s);
+        Intent intent = new Intent(this, DisplayActivity.class);
+        intent.putExtra(DisplayActivity.JOKE_EXTRA, s);
         startActivity(intent);
     }
 }

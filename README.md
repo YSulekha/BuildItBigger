@@ -28,7 +28,12 @@ Once you have a functioning project, consider adding more features to test your 
 * Have the app display a loading indicator while the joke is being fetched from the server.
 * Write a Gradle task that starts the GCE dev server, runs all the Android tests, and shuts down the dev server.
 
+Note: Add your google play services API key in google-services.json file for the app to work
+
 ##App Walkthrough   
    
- <img src='https://github.com/YSulekha/StockHawk/blob/master/BuildItBigger-vfree' title='App Walkthrough' width='' alt='App Walkthrough' />
+ <img src='https://github.com/YSulekha/BuildItBigger/blob/master/BuildItBigger-vfree.gif' title='App Walkthrough' width='' alt='App Walkthrough' />
+
+ Paid Version
+ <img src='https://github.com/YSulekha/BuildItBigger/blob/master/BuildItBigger-vpaid.gif' title='App Walkthrough' width='' alt='App Walkthrough' />
 

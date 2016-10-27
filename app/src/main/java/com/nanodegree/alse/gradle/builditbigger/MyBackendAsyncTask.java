@@ -10,12 +10,12 @@ import com.nanodegree.gradle.backend.myApi.MyApi;
 import java.io.IOException;
 
 
-public class MyBackendAsyncTask extends AsyncTask<Context,Void,String> {
+public class MyBackendAsyncTask extends AsyncTask<Context, Void, String> {
     private MyApi myAPIService = null;
     private Context context;
     TaskCompleteListener listener;
 
-    public MyBackendAsyncTask setListener(TaskCompleteListener l){
+    public MyBackendAsyncTask setListener(TaskCompleteListener l) {
         listener = l;
         return this;
     }
@@ -24,17 +24,16 @@ public class MyBackendAsyncTask extends AsyncTask<Context,Void,String> {
     //Backend task to fetch joke from GCE server
     @Override
     protected String doInBackground(Context... params) {
-        if(myAPIService == null){
+        if (myAPIService == null) {
             //Connect to backend
-            MyApi.Builder builder = new MyApi.Builder(AndroidHttp.newCompatibleTransport(),new AndroidJsonFactory(),null)
+            MyApi.Builder builder = new MyApi.Builder(AndroidHttp.newCompatibleTransport(), new AndroidJsonFactory(), null)
                     .setRootUrl("https://builditbigger-6b5dd.appspot.com/_ah/api/");
             myAPIService = builder.build();
         }
         context = params[0];
-        try{
+        try {
             return myAPIService.getJoke().execute().getData();
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             return e.getMessage();
         }
     }
@@ -44,7 +43,7 @@ public class MyBackendAsyncTask extends AsyncTask<Context,Void,String> {
         listener.onComplete(s);
     }
 
-    public interface TaskCompleteListener{
+    public interface TaskCompleteListener {
         public void onComplete(String s);
     }
 
