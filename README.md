@@ -34,6 +34,6 @@ Note: Add your google play services API key in google-services.json file for the
    
  <img src='https://github.com/YSulekha/BuildItBigger/blob/master/BuildItBigger-vfree.gif' title='App Walkthrough' width='' alt='App Walkthrough' />
 
- Paid Version
+ ###Paid Version
  <img src='https://github.com/YSulekha/BuildItBigger/blob/master/BuildItBigger-vpaid.gif' title='App Walkthrough' width='' alt='App Walkthrough' />
 
